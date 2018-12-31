@@ -1,7 +1,12 @@
-const init = () => {
+const init = (data) => {
     
     const controllers = {
-        getController: require('./get.controller').init()
+        getController: 
+            require('./get.controller')
+                .init(data),
+        postController: 
+            require('./post.controller')
+                .init(data)
     };
 
     return controllers;

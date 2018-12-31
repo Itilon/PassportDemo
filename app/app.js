@@ -5,7 +5,7 @@ const init = (data) => {
 
     require('../config/app.config').configApp(app);
 
-    const controllers = require('./controllers').init();
+    const controllers = require('./controllers').init(data);
     require('./routers/public.routes').attachTo(app, controllers);
 
     return Promise.resolve(app);

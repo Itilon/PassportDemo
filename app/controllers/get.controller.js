@@ -1,4 +1,4 @@
-const init = () => {
+const init = (data) => {
     const getHome = (req, res) => {
         res.render('home');
     };

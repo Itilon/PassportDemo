@@ -1,5 +1,9 @@
 const init = (db) => {
-    return Promise.resolve(console.log('Data layer was initialized.'));
+    const users = require('./users.data').init(require('./models/user.model').init(db));
+
+    return Promise.resolve({
+        users
+    });
 };
 
 module.exports = { init };
