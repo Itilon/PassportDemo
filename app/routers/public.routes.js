@@ -1,12 +1,16 @@
 const { Router } = require('express');
 
-const attachTo = (app) => {
+const attachTo = (app, controllers) => {
     const router = new Router();
 
+    const { getController: { getHome, getRegister, getLogin } } = controllers;
+
     app
-        .get('/', (req, res) => {
-            res.render('home');
-        });
+        .get('/', getHome)
+
+        .get('/register', getRegister)
+
+        .get('/login', getLogin);
 
     app.use('/', router);
 };
