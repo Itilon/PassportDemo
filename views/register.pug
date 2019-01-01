@@ -11,19 +11,34 @@ block body
                     form(action="/register" method="POST")
                         .form-group
                             label(for="username")
-                            input#username.form-control(type="text" name="username" placeholder="Please, select a username!")
+                            if username
+                                input#username.form-control(type="text" name="username" placeholder="Please, select a username!" value=username)
+                            else
+                                input#username.form-control(type="text" name="username" placeholder="Please, select a username!")
                         .form-group
                             label(for="name")
-                            input#name.form-control(type="text" name="name" placeholder="Please, enter your name!")
+                            if name
+                                input#name.form-control(type="text" name="name" placeholder="Please, enter your name!" value=name)
+                            else
+                                input#name.form-control(type="text" name="name" placeholder="Please, enter your name!")
                         .form-group
                             label(for="email")
-                            input#email.form-control(type="email" name="email" placeholder="Please, enter your email!")
+                            if email
+                                input#email.form-control(type="email" name="email" placeholder="Please, enter your email!" value=email)
+                            else
+                                input#email.form-control(type="email" name="email" placeholder="Please, enter your email!")
                         .form-group
                             label(for="password")
-                            input#password.form-control(type="password" name="password" placeholder="Please, enter a password!")
+                            if password
+                                input#password.form-control(type="password" name="password" placeholder="Please, enter a password!" value=password)
+                            else
+                                input#password.form-control(type="password" name="password" placeholder="Please, enter a password!")
                         .form-group
                             label(for="confirmed")
-                            input#confirmed.form-control(type="password" name="confirmed" placeholder="Please, confirm your password!")
+                            if confirmed
+                                input#confirmed.form-control(type="password" name="confirmed" placeholder="Please, confirm your password!" value=confirmed)
+                            else
+                                input#confirmed.form-control(type="password" name="confirmed" placeholder="Please, confirm your password!")
                         button.btn.btn-primary.btn-block(type="submit") Register
                     p.lead.mt-4
                         | Already have an account? 
