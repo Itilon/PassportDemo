@@ -1,3 +1,5 @@
+const passport = require('passport');
+
 const _verifyFields = (input) => {
     const { username, name, email, password, confirmed } = input;
     const errors = [];
@@ -44,25 +46,28 @@ const init = (data) => {
 
        data.users.addUser({ username, name, email, password, confirmed })
         .then((result) => {
-            if (result.msg === 'This username is already registered.') {
-                errors.push(result.msg);
-
-                return res.render('register', {
-                    errors,
-                    username,
-                    name,
-                    email,
-                    password,
-                    confirmed
-                });
-            }
-
             res.redirect('/login');
+        })
+        .catch((err) => {
+            errors.push(err);
+
+            return res.render('register', {
+                errors,
+                username,
+                name,
+                email,
+                password,
+                confirmed
+            });
         });
     };
 
-    const postLogin = (req, res) => {
-
+    const postLogin = (req, res, next) => {
+        passport.authenticate('local', {
+            successRedirect: '/dashboard',
+            failureRedirect: '/login',
+            failureFlash: false
+        })(req, res, next);
     };
 
     return {
