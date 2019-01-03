@@ -11,10 +11,15 @@ const init = (data) => {
         res.render('login');
     };
 
+    const getDashboard = (req, res) => {
+        res.render('dashboard');
+    };
+
     return {
         getHome,
         getRegister,
-        getLogin
+        getLogin,
+        getDashboard
     }
 };
 

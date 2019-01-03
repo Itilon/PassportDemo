@@ -4,7 +4,7 @@ const attachTo = (app, controllers) => {
     const router = new Router();
 
     const { 
-        getController: { getHome, getRegister, getLogin }, 
+        getController: { getHome, getRegister, getLogin, getDashboard }, 
         postController: { postRegister, postLogin } 
     } = controllers;
 
@@ -15,6 +15,8 @@ const attachTo = (app, controllers) => {
         .get('/register', getRegister)
 
         .get('/login', getLogin)
+
+        .get('/dashboard', getDashboard)
 
         .post('/register', postRegister)
 
