@@ -1,4 +1,5 @@
 const { Router } = require('express');
+const { ensureAuthentication } = require('../validation/auth.validator');
 
 const attachTo = (app, controllers) => {
     const router = new Router();
@@ -16,7 +17,7 @@ const attachTo = (app, controllers) => {
 
         .get('/login', getLogin)
 
-        .get('/dashboard', getDashboard)
+        .get('/dashboard', ensureAuthentication, getDashboard)
 
         .post('/register', postRegister)
 

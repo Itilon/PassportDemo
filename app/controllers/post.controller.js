@@ -21,6 +21,8 @@ const init = (data) => {
 
       addUser({ username, name, email, password, confirmed })
         .then((result) => {
+            const { msg } = result
+            req.flash('success_msg', msg);
             res.redirect('/login');
         })
         .catch((err) => {
@@ -41,7 +43,7 @@ const init = (data) => {
         passport.authenticate('local', {
             successRedirect: '/dashboard',
             failureRedirect: '/login',
-            failureFlash: false
+            failureFlash: true
         })(req, res, next);
     };
 
