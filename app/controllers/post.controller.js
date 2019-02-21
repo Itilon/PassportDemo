@@ -4,7 +4,7 @@ const init = (data) => {
     const { addUser } = data.users;
 
     const postRegister = (req, res) => {
-        const errors = require('../validation/user.validator').userValidator(req.body);
+        const errors = require('../validation/user.validator').registerValidator(req.body);
 
         const { username, name, email, password, confirmed } = req.body;
 
@@ -40,6 +40,18 @@ const init = (data) => {
     };
 
     const postLogin = (req, res, next) => {
+        const errors = require('../validation/user.validator').loginValidator(req.body);
+
+        const { username, password } = req.body;
+
+        if (errors.length > 0) {
+            return res.render('login', {
+                errors,
+                username,
+                password
+            });
+        }
+
         passport.authenticate('local', {
             successRedirect: '/dashboard',
             failureRedirect: '/login',

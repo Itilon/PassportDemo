@@ -1,6 +1,12 @@
-mixin messages(success_msg)
+mixin messages(success_msg, error_msg)
     if (success_msg != '')
         .alert.alert-success.alert-dismissible.fade.show
             =success_msg
+            button.close(type="button" data-dismiss="alert" aria-label="Close")
+                span(aria-hidden="true") &times;
+
+    if (error_msg != '')
+        .alert.alert-warning.alert-dismissible.fade.show
+            =error_msg
             button.close(type="button" data-dismiss="alert" aria-label="Close")
                 span(aria-hidden="true") &times;

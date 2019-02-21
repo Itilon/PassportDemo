@@ -3,7 +3,8 @@ const ensureAuthentication = (req, res, next) => {
         return next();
     }
 
-    res.redirect('/login');
+    req.flash('error_msg', 'Sorry, but access is denied due to invalid credentials. You do not have a permission to view this page.');
+    res.redirect('/401');
 };
 
 module.exports = { ensureAuthentication };

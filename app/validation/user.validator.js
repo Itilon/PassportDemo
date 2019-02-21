@@ -1,4 +1,4 @@
-const userValidator = (input) => {
+const registerValidator = (input) => {
     const { username, name, email, password, confirmed } = input;
     const errors = [];
 
@@ -25,4 +25,26 @@ const userValidator = (input) => {
     return errors;
 };
 
-module.exports = { userValidator };
+const loginValidator = (input) => {
+    const { username, password } = input;
+    const errors = [];
+
+    if (!username || !password) {
+        errors.push({ msg: 'Please, fill in all fields!'});
+    }
+
+    if (username.length < 6 || username.length > 30) {
+        errors.push({ msg: 'Username must be between 6 and 30 characters long.' });
+    }
+
+    if (password.length < 6 || password.length > 30) {
+        errors.push({ msg: 'Password must be between 6 and 30 characters long.' });
+    }
+
+    return errors;
+}
+
+module.exports = { 
+    registerValidator,
+    loginValidator 
+};

@@ -9,14 +9,26 @@ block body
                     h1.text-center.mb-3
                         i.fas.fa-sign-in-alt
                         | Login
-                    +messages(success_msg)
+                    +messages(success_msg, '')
+                    if errors
+                        each error in errors
+                            .alert.alert-warning.alert-dismissible.custom-alert.fade.show(role="alert")
+                                p=error.msg
+                                button.close(type="button" data-dismiss="alert" aria-label="Close")
+                                    span(aria-hidden="true") &times;
                     form(action="/login" method="POST")
                         .form-group
                             label(for="username") Username
-                            input#username.form-control(type="text" name="username" placeholder="Please, enter your username!")
+                            if username
+                                input#username.form-control(type="text" name="username" placeholder="Please, enter your username!" value=username)
+                            else
+                                input#username.form-control(type="text" name="username" placeholder="Please, enter your username!")
                         .form-group
                             label(for="password") Password
-                            input#password.form-control(type="password" name="password" placeholder="Please, enter your password!")
+                            if password
+                                input#password.form-control(type="password" name="password" placeholder="Please, enter your password!" value=password)
+                            else
+                                input#password.form-control(type="password" name="password" placeholder="Please, enter your password!")
                         button.btn.btn-primary.btn-block(type="submit") Login
                     p.lead.mt-4
                         | You don't have an account? 
