@@ -17,6 +17,16 @@ const init = (User, bcrypt) => {
         return Promise.resolve({ msg: 'You are now registered and can log in.' }); 
     };
 
+    const updateUser = async (userInput) => {
+        const { id, name, email } = userInput;
+        const user = await User.findById(id);
+        user.name = name;
+        user.email = email;
+        
+        await user.save();
+        return Promise.resolve({ msg: 'User information was successfully updated.'});
+    };
+
     const findUser = async (username, password) => {
         const user = await User.findOne({ username: username });
 
@@ -40,6 +50,7 @@ const init = (User, bcrypt) => {
 
     return {
         addUser,
+        updateUser,
         findUser,
         findById
     }

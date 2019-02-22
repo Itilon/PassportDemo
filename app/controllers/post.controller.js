@@ -1,7 +1,7 @@
 const passport = require('passport');
 
 const init = (data) => {
-    const { addUser } = data.users;
+    const { addUser, updateUser } = data.users;
 
     const postRegister = (req, res) => {
         const errors = require('../validation/user.validator').registerValidator(req.body);
@@ -59,9 +59,21 @@ const init = (data) => {
         })(req, res, next);
     };
 
+    const postUpdate = (req, res) => {
+        const { id, name, email } = req.body;
+        updateUser({ id, name, email })
+            .then((result) => {
+                const { msg } = result;
+                req.flash('success_msg', msg);
+                res.redirect('/dashboard');
+            })
+            .catch((err) => console.error(err));
+    }
+
     return {
         postRegister,
-        postLogin       
+        postLogin,
+        postUpdate       
     }
 };
 
