@@ -1,7 +1,7 @@
 const passport = require('passport');
 
 const init = (data) => {
-    const { addUser, updateUser } = data.users;
+    const { addUser, updateUser, deleteUser } = data.users;
 
     const postRegister = (req, res) => {
         const errors = require('../validation/user.validator').registerValidator(req.body);
@@ -60,20 +60,45 @@ const init = (data) => {
     };
 
     const postUpdate = (req, res) => {
-        const { id, name, email } = req.body;
-        updateUser({ id, name, email })
+        const errors = require('../validation/user.validator').updateValidator(req.body);
+
+        const { username, _id, name, email } = req.body;
+
+        const user = { username, _id, name, email };
+
+        if (errors.length > 0) {
+            return res.render('dashboard', {
+                errors,
+                user
+            });
+        }
+
+        updateUser({ _id, name, email })
             .then((result) => {
                 const { msg } = result;
                 req.flash('success_msg', msg);
                 res.redirect('/dashboard');
             })
             .catch((err) => console.error(err));
-    }
+    };
+
+    const postDelete = (req, res) => {
+        const { id } = req.params;
+
+        deleteUser(id)
+            .then((result) => {
+                const { msg } = result;
+                req.flash('success_msg', msg);
+                res.redirect('/login');
+            })
+            .catch((err) => console.error(err));
+    };
 
     return {
         postRegister,
         postLogin,
-        postUpdate       
+        postUpdate,
+        postDelete     
     }
 };
 

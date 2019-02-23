@@ -18,13 +18,18 @@ const init = (User, bcrypt) => {
     };
 
     const updateUser = async (userInput) => {
-        const { id, name, email } = userInput;
-        const user = await User.findById(id);
+        const { _id, name, email } = userInput;
+        const user = await User.findById(_id);
         user.name = name;
         user.email = email;
         
         await user.save();
-        return Promise.resolve({ msg: 'User information was successfully updated.'});
+        return Promise.resolve({ msg: 'User information was successfully updated.' });
+    };
+
+    const deleteUser = async (id) => {
+        await User.deleteOne({ _id: id });
+        return Promise.resolve({ msg: 'User was deleted.' });
     };
 
     const findUser = async (username, password) => {
@@ -51,6 +56,7 @@ const init = (User, bcrypt) => {
     return {
         addUser,
         updateUser,
+        deleteUser,
         findUser,
         findById
     }

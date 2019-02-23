@@ -44,7 +44,23 @@ const loginValidator = (input) => {
     return errors;
 }
 
+const updateValidator = (input) => {
+    const { name, email } = input;
+    const errors = [];
+
+    if (!name || !email) {
+        errors.push({ msg: 'Please, fill in all fields!'});
+    }
+
+    if (name.length < 2 || name.length > 40) {
+        errors.push({ msg: 'Name must be between 2 and 40 characters long.' });
+    }
+
+    return errors;
+}
+
 module.exports = { 
     registerValidator,
-    loginValidator 
+    loginValidator,
+    updateValidator 
 };
