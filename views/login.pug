@@ -16,6 +16,11 @@ block body
                                 p=error.msg
                                 button.close(type="button" data-dismiss="alert" aria-label="Close")
                                     span(aria-hidden="true") &times;
+                    if (error != '')
+                        .alert.alert-warning.alert-dismissible.custom-alert.fade.show(role="alert")
+                            p=error
+                            button.close(type="button" data-dismiss="alert" aria-label="Close")
+                                span(aria-hidden="true") &times;
                     form(action="/login" method="POST")
                         .form-group
                             label(for="username") Username
